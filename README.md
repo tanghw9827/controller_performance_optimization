@@ -571,71 +571,70 @@ e. 图1 红色曲线为输入加速度，绿色曲线为底盘反馈加速度，
 ## 2.3 控制器设计
 ### 2.3.1 转向的前馈控制
 
-### 2.3.1 转向的前馈控制
-
 **为什么需要前馈：**
 
-$$
+\[
 \delta  =  - Kx =  - k_{1}e_{1} - k_{2}e_{2} - k_{3}e_{3} - k_{4}e_{4}
-$$
+\]
 
-$$
+\[
 \dot{x} = \left( A - BK\right) x + C\dot{\psi}_{\text{des}}
-$$
+\]
 
-由于 $C\dot{\psi}_{\text{des}}$ 的存在，即使 matrix $A - BK$ 是渐进稳定的，当车辆在弯道行驶时，tracking error 不会趋于 0。
+由于 \(C\dot{\psi}_{\text{des}}\) 的存在，即使矩阵 \(A - BK\) 是渐进稳定的，当车辆在弯道行驶时，tracking error 不会趋于 0。
 
 **前馈控制器设计：**
 
 假设控制量为状态反馈 + 补偿道路曲率的前馈项
 
-$$
+\[
 \delta  =  - Kx + \delta_{\text{ff}}
-$$
+\]
 
 那么闭环系统为：
 
-$$
+\[
 \dot{x} = \left( A - BK\right) x + B\delta_{\text{ff}} + C\dot{\psi}_{\text{des}}
-$$
+\]
 
 假设 0 初始条件，Laplace 变换:
 
-$$
+\[
 X\left( s\right)  = \left[ sI - \left( A - BK\right) \right]^{-1}\left\{  BL\left( \delta_{\text{ff}}\right)  + CL\left( \dot{\psi}_{\text{des}}\right) \right\}
-$$
+\]
 
-$$
+\[
 X_{\text{ss}} = \lim_{t \rightarrow \infty}x(t)  = \lim_{s \rightarrow  0} sX(s)  =  - \left( A - BK\right)^{-1}\left\{  B\delta_{\text{ss}} + C\dot{\psi}_{\text{des}}\right\}
-$$
+\]
 
 让横向位置误差的稳态为 0，可得前馈前轮转角为：
 
-$$
+\[
 \delta_{\text{ff}} = \frac{L}{R} + K_{v}a_{y} + k_{3} \cdot e_{2\_\text{ss}}, \quad a_{y} = \frac{V_{x}^{2}}{R}
-$$
+\]
 
 其中
 
 Understeer gradient:
 
-$$
+\[
 K_{v} = \frac{m_{f}}{c_{f}} - \frac{m_{r}}{c_{r}}
-$$
+\]
 
 Steady-state yaw angle error:
 
-$$
+\[
 e_{2\_\text{ss}} =  - \frac{l_{r}}{R} + \frac{l_{f}}{c_{r}\left( l_{f} + l_{r}\right) }\frac{mV_{x}^{2}}{R}
-$$
+\]
 
-$$
+\[
 =  - \frac{\widehat{l}_{r}}{R} + \alpha_{r}
-$$
+\]
 
 yaw-angle error 的稳态不为 0 并不是一个问题。
 
-我们关心的是 heading angle $\psi  + \beta  \rightarrow \psi_{\text{des}}$
+我们关心的是 heading angle \(\psi  + \beta  \rightarrow \psi_{\text{des}}\)
+
 
 ### 2.3.2 反馈控制
 ### 2.3.2.1 Continuous LQR
