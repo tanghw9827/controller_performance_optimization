@@ -299,8 +299,6 @@ $$
 
 - 后轴旋转半径 
 
-- 后轴旋转半径 
-
 $$
 R_b = \sqrt{b^2 - k^2} + \frac{B}{2}
 $$
@@ -400,65 +398,65 @@ Apollo 使用轮胎厂商给的侧偏刚度测试曲线 -1000N/°，转化后为
 
 轮胎测偏刚度受以下因素影响，因此不同的车和轮胎无法使用同一条“侧偏力-侧偏角”曲线。
 
-1. 轮胎从结构设计上可分为斜交和子午线轮胎。子午线胎比斜交胎侧偏刚度高，而钢丝子午线胎又比尼龙子午线胎侧偏刚度高。
+- 轮胎从结构设计上可分为斜交和子午线轮胎。子午线胎比斜交胎侧偏刚度高，而钢丝子午线胎又比尼龙子午线胎侧偏刚度高。
 
-2. 第三, 在直径相同的轮胎中, 宽胎比窄胎有利于提高侧偏刚度。
+- 第三, 在直径相同的轮胎中, 宽胎比窄胎有利于提高侧偏刚度。
 
-3. 对同一轮胎而言, 载重越小、侧偏刚度越小, 所以, 轻车相比重车更容易发飘。
+- 对同一轮胎而言, 载重越小、侧偏刚度越小, 所以, 轻车相比重车更容易发飘。
 
-4. 当车速越快时, 轮胎载荷越小, 侧偏刚度就越小。
+- 当车速越快时, 轮胎载荷越小, 侧偏刚度就越小。
 
-5. 轮胎气压还和侧偏刚度有关。一般说来，气压越低，侧偏刚度越小。
+- 轮胎气压还和侧偏刚度有关。一般说来，气压越低，侧偏刚度越小。
 
 **GPS/INS综合测量法:**
 
 前轮侧偏角
 
 $$
-{\theta }_{vf} = {\tan }^{-1}\frac{{V}_{y} + {l}_{f}\dot{\psi }}{{V}_{x}}
+\theta_{vf} = \tan^{-1}\left(\frac{V_y + l_f \dot{\psi}}{V_x}\right)
 $$
 
 $$
-{\theta }_{vr} = {\tan }^{-1}\frac{{V}_{y} - {l}_{r}\dot{\psi }}{{V}_{x}}
+\theta_{vr} = \tan^{-1}\left(\frac{V_y - l_r \dot{\psi}}{V_x}\right)
 $$
 
-汽车横向动力学(小角度假设) :
+汽车横向动力学（小角度假设）:
 
 $$
-m\left( {\ddot{y} + {V}_{x}\dot{\psi }}\right)  = {F}_{yf} + {F}_{yr}
-$$
-
-$$
-= {C}_{f}\left( {\delta  - \left( {\theta }_{vf}\right) }\right)  + {C}_{r}\left( {-{\theta }_{vr}}\right)
+m\left(\ddot{y} + V_x \dot{\psi}\right) = F_{yf} + F_{yr}
 $$
 
 $$
-= \left\lbrack  \begin{array}{ll} \delta  - \left( \frac{{V}_{y} + {l}_{f}\dot{\psi }}{{V}_{x}}\right) &  - \frac{{V}_{y} - {l}_{r}\dot{\psi }}{{V}_{x}} \end{array}\right\rbrack  \left\lbrack  \begin{array}{l} {C}_{f} \\  {C}_{r} \end{array}\right\rbrack  \text{ (1) } \tag{1}
+= C_f\left(\delta - \theta_{vf}\right) + C_r\left(-\theta_{vr}\right)
 $$
 
 $$
-{I}_{z}\ddot{\psi } = {l}_{f}{F}_{yf} - {l}_{r}{F}_{yr}
+= \begin{bmatrix} \delta - \frac{V_y + l_f \dot{\psi}}{V_x} & -\frac{V_y - l_r \dot{\psi}}{V_x} \end{bmatrix} \begin{bmatrix} C_f \\ C_r \end{bmatrix} \tag{1}
 $$
 
 $$
-= {l}_{f}{C}_{f}\left( {\delta  - \left( {\theta }_{vf}\right) }\right)  + {l}_{r}{C}_{r}\left( {-{\theta }_{vr}}\right)
+I_z \ddot{\psi} = l_f F_{yf} - l_r F_{yr}
 $$
 
 $$
-\Leftrightarrow  0 = \left\lbrack  \begin{array}{lll} {l}_{f}\left( {\delta  - \left( {\theta }_{vf}\right) }\right) &  - {l}_{r}{\theta }_{vr} &  - \ddot{\psi } \end{array}\right\rbrack  \left\lbrack  \begin{matrix} {C}_{f} \\  {C}_{r} \\  {I}_{z} \end{matrix}\right\rbrack  . \tag{2}
-$$
-
-有（1）（2）可得
-
-$$
-\left\lbrack  \begin{matrix} \delta  - \left( \frac{{V}_{y} + {l}_{f}\dot{\psi }}{{V}_{x}}\right) &  - \frac{{V}_{y} - {l}_{r}\dot{\psi }}{{V}_{x}} & 0 \\  {l}_{f}\left( {\delta  - \left( \frac{{V}_{y} + {l}_{f}\dot{\psi }}{{V}_{x}}\right) }\right) &  - {l}_{r}\frac{{V}_{y} - {l}_{r}\dot{\psi }}{{V}_{x}} &  - \ddot{\psi } \end{matrix}\right\rbrack  \left\lbrack  \begin{matrix} {C}_{f} \\  {C}_{r} \\  {I}_{z} \end{matrix}\right\rbrack   = \left\lbrack  \begin{matrix} m\left( {\ddot{y} + {V}_{x}\dot{\psi }}\right) \\  0 \end{matrix}\right\rbrack
+= l_f C_f \left(\delta - \theta_{vf}\right) + l_r C_r \left(-\theta_{vr}\right)
 $$
 
 $$
-\left\lbrack  \begin{matrix} \delta  - {\theta }_{vf} &  - {\theta }_{vr} & 0 \\  {l}_{f}\left( {\delta  - \left( {\theta }_{vf}\right) }\right) &  - {l}_{r}{\theta }_{vr} &  - \ddot{\psi } \end{matrix}\right\rbrack  \left\lbrack  \begin{matrix} {C}_{f} \\  {C}_{r} \\  {I}_{z} \end{matrix}\right\rbrack   = \left\lbrack  \begin{matrix} m\left( {a}_{y}\right) \\  0 \end{matrix}\right\rbrack
+\Leftrightarrow 0 = \begin{bmatrix} l_f\left(\delta - \theta_{vf}\right) & -l_r \theta_{vr} & -\ddot{\psi} \end{bmatrix} \begin{bmatrix} C_f \\ C_r \\ I_z \end{bmatrix} \tag{2}
 $$
 
-则 ${C}_{f}\text{、}{C}_{r}$ 可以通过曲线拟合的方式获得,
+根据方程（1）和（2）可得：
+
+$$
+\begin{bmatrix} \delta - \frac{V_y + l_f \dot{\psi}}{V_x} & -\frac{V_y - l_r \dot{\psi}}{V_x} & 0 \\ l_f\left(\delta - \frac{V_y + l_f \dot{\psi}}{V_x}\right) & -l_r\frac{V_y - l_r \dot{\psi}}{V_x} & -\ddot{\psi} \end{bmatrix} \begin{bmatrix} C_f \\ C_r \\ I_z \end{bmatrix} = \begin{bmatrix} m\left(\ddot{y} + V_x \dot{\psi}\right) \\ 0 \end{bmatrix}
+$$
+
+$$
+\begin{bmatrix} \delta - \theta_{vf} & -\theta_{vr} & 0 \\ l_f\left(\delta - \theta_{vf}\right) & -l_r \theta_{vr} & -\ddot{\psi} \end{bmatrix} \begin{bmatrix} C_f \\ C_r \\ I_z \end{bmatrix} = \begin{bmatrix} m\left(a_y\right) \\ 0 \end{bmatrix}
+$$
+
+则 $C_f$ 和 $C_r$ 可以通过曲线拟合的方式获得。
 
 使用最小二乘法获得
 
