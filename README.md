@@ -905,20 +905,21 @@ $$
 其中 n 为：
 
 $$
-n = \text{state\_dim\_} \times (\text{horizon\_} + 1) + \text{control\_dim\_} \times \text{horizon\_}
+n = \text{state\`_dim\_} \times (\text{horizon\`_} + 1) + \text{control\`_dim\_} \times \text{horizon\`_}
 $$
 
 A(row, cols)，row 为：
 
 $$
-\text{row} = \text{state\_dim\_} \times (\text{horizon\_} + 1) + \text{state\_dim\_} \times (\text{horizon\_} + 1) + \text{control\_dim\_} \times \text{horizon\_}
+\text{row} = \text{state\`_dim\_} \times (\text{horizon\`_} + 1) + \text{state\`_dim\_} \times (\text{horizon\`_} + 1) + \text{control\`_dim\_} \times \text{horizon\`_}
 $$
 
 cols 为：
 
 $$
-\text{cols} = \text{state\_dim\_} \times (\text{horizon\_} + 1) + \text{control\_dim\_} \times \text{horizon\_}
+\text{cols} = \text{state\`_dim\_} \times (\text{horizon\`_} + 1) + \text{control\`_dim\_} \times \text{horizon\`_}
 $$
+
 
 
 注意事项
