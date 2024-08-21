@@ -656,61 +656,7 @@ Assume that $H = H^T \geq 0$, $Q = Q^T \geq 0$, $R = R^T > 0$.
 
 Let $g_k(z_k, u_k) = \frac{1}{2}(z_k^T Q_k z_k + u_k^T R_k u_k)$.
 
-**"cost-to-go"** $J_{N-1}[X_N] = \frac{1}{2}x_N^T H x_N$ — find $J_{N-1}[X_{N-1}]$
-
-$$
-J_{N-1}[X_{N-1}] = \min_{u_{N-1}} \left[ g_{N-1}(z_{N-1}, u_{N-1}) + J_N[X_N] \right]
-$$
-
-$$
-= \min_{u_{N-1}} \left[ \frac{1}{2}(z_{N-1}^T Q_{N-1} z_{N-1} + u_{N-1}^T R_{N-1} u_{N-1}) + \frac{1}{2}x_N^T H x_N \right]
-$$
-
-$$
-= \min_{u_{N-1}} \left[ \frac{1}{2}\left\{ x_{N-1}^T Q_{N-1} x_{N-1} + u_{N-1}^T R_{N-1} u_{N-1} + \left(A_{N-1} x_{N-1} + B_{N-1} u_{N-1}\right)^T H \left(A_{N-1} x_{N-1} + B_{N-1} u_{N-1}\right)\right\} \right]
-$$
-
-关于控制输入 $u_{N-1}$ 的一阶导数：
-
-$$
-\frac{\partial J_{N-1}[X_{N-1}]}{\partial u_{N-1}} = u_{N-1}^T R_{N-1} + \left(A_{N-1} x_{N-1} + B_{N-1} u_{N-1}\right)^T H B_{N-1}
-$$
-
-二阶导数：
-
-$$
-\frac{\partial^2 J_{N-1}[X_{N-1}]}{\partial u_{N-1}^2} = R_{N-1} + B_{N-1}^T H B_{N-1} > 0
-$$
-
-Minimum point:
-
-$$
-[R_{N-1} + B_{N-1}^T H B_{N-1}] u_{N-1} + B_{N-1}^T H A_{N-1} X_{N-1} = 0
-$$
-
-$$
-u_{N-1}^* = -[R_{N-1} + B_{N-1}^T H B_{N-1}]^{-1} B_{N-1}^T H A_{N-1} x_{N-1}
-$$
-
-$$
-= -F_{N-1} x_{N-1}
-$$
-
-With this control decision:
-
-$$
-J_{N-1}[X_{N-1}] = \frac{1}{2} x_{N-1}^T \left\{Q_{N-1} + F_{N-1}^T R_{N-1} F_{N-1} + \left(A_{N-1} - B_{N-1} F_{N-1}\right)^T H \left(A_{N-1} - B_{N-1} F_{N-1}\right)\right\} x_{N-1}
-$$
-
-Note that $P_N = H$.
-
-......
-
-$$
-J_k[X_k] = \min_{u_k} \left[ \frac{1}{2}\left\{ x_k^T Q_k x_k + u_k^T R_k u_k + J_{k+1}[X_{k+1}] \right\}\right]
-$$
-
-......
+![Fig 1](./images/2024-08-21_20-13.png)
 
 **总结：**
 
