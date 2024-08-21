@@ -626,7 +626,7 @@ yaw角误差的稳态不为零并不是问题。我们关心的是航向角 $\ps
 求解控制输入 $u$，满足：
 
 $$
-\min J = \frac{1}{2}{\int }_{0}^{T}\left( x^{T}Qx + u^{T}Ru\right) dt + \frac{1}{2}x^{T}\left( T\right) P_{1}x\left( T\right)
+\min J = \frac{1}{2} \int_{0}^{T} \left( x^{T} Q x + u^{T} R u \right) dt + \frac{1}{2} x^{T}(T) P_{1} x(T)
 $$
 
 约束条件：
