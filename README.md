@@ -525,7 +525,7 @@ $$
 因此侧偏刚度为（单轮胎）
 
 $$
-C_f = C_r = B \times C \times D = 0.1824 \times 1.488 \times 6607 = 1793.2138\, \text{N/}^\circ = 102743.5824\, \text{N/rad}
+{C}_{f} = {C}_{r} = B \times  C \times  D = {0.1824} \times  {1.488} \times  {6607} = {1793.2138N}/{}^{0} = {102743.5824}\mathrm{\;N}/\mathrm{{rad}}
 $$
 
 <img src="https://cdn.noedgeai.com/01917399-ede1-7137-b395-32a45b12c0ee_10.jpg?x=109&y=810&w=1241&h=627"/>
@@ -573,68 +573,51 @@ e. 图1 红色曲线为输入加速度，绿色曲线为底盘反馈加速度，
 
 **为什么需要前馈：**
 
-\[
-\delta  =  - Kx =  - k_{1}e_{1} - k_{2}e_{2} - k_{3}e_{3} - k_{4}e_{4}
-\]
+$\delta  =  - {Kx} =  - {k}_{1}{e}_{1} - {k}_{2}{e}_{2} - {k}_{3}{e}_{3} - {k}_{4}{e}_{4}$
 
-\[
-\dot{x} = \left( A - BK\right) x + C\dot{\psi}_{\text{des}}
-\]
+$\dot{x} = \left( {A - {BK}}\right) x + C{\dot{\psi }}_{des}$
 
-由于 \(C\dot{\psi}_{\text{des}}\) 的存在，即使矩阵 \(A - BK\) 是渐进稳定的，当车辆在弯道行驶时，tracking error 不会趋于 0。
+由于 $C{\dot{\psi }}_{des}$ 的存在，即使 matrix（A - BK）是渐进稳定的，当车辆在弯道行驶时，tracking error不会趋于0
 
 **前馈控制器设计：**
 
 假设控制量为状态反馈 + 补偿道路曲率的前馈项
 
-\[
-\delta  =  - Kx + \delta_{\text{ff}}
-\]
+$\delta  =  - {Kx} + \delta _{ff}$
 
 那么闭环系统为：
 
-\[
-\dot{x} = \left( A - BK\right) x + B\delta_{\text{ff}} + C\dot{\psi}_{\text{des}}
-\]
+$\dot{x} = \left( {A - {BK}}\right) x + B{\delta }_{ff} + C{\dot{\psi }}_{des}$
 
-假设 0 初始条件，Laplace 变换:
+假设0初始条件，Laplace transforms:
 
-\[
-X\left( s\right)  = \left[ sI - \left( A - BK\right) \right]^{-1}\left\{  BL\left( \delta_{\text{ff}}\right)  + CL\left( \dot{\psi}_{\text{des}}\right) \right\}
-\]
+$X\left( s\right)  = {\left\lbrack  sI - \left( A - BK\right) \right\rbrack  }^{-1}\left\{  {{BL}\left( {\delta }_{ff}\right)  + {CL}\left( {\dot{\psi }}_{des}\right) }\right\}$
 
-\[
-X_{\text{ss}} = \lim_{t \rightarrow \infty}x(t)  = \lim_{s \rightarrow  0} sX(s)  =  - \left( A - BK\right)^{-1}\left\{  B\delta_{\text{ss}} + C\dot{\psi}_{\text{des}}\right\}
-\]
+${X}_{ss} = \mathop{\lim }\limits_{{t \rightarrow  \infty }}x\left( t\right)  = \mathop{\lim }\limits_{{s \rightarrow  0}}{sX}\left( s\right)  =  - {\left( A - BK\right) }^{-1}\left\{  {B{\delta }_{ss} + C{\dot{\psi }}_{des}}\right\}$
 
-让横向位置误差的稳态为 0，可得前馈前轮转角为：
+让横向位置误差的稳态为0，可得前馈前轮转角为：
 
-\[
-\delta_{\text{ff}} = \frac{L}{R} + K_{v}a_{y} + k_{3} \cdot e_{2\_\text{ss}}, \quad a_{y} = \frac{V_{x}^{2}}{R}
-\]
+${\delta }_{ff} = L/R + {K}_{v}{a}_{y} + {k}_{3} * {e}_{2\_ {ss}},{a}_{y} = {V}_{x}^{2}/R$
 
 其中
 
 Understeer gradient:
 
-\[
-K_{v} = \frac{m_{f}}{c_{f}} - \frac{m_{r}}{c_{r}}
-\]
+${K}_{v} = {m}_{f}/{c}_{f} - {m}_{r}/{c}_{r}$
 
 Steady-state yaw angle error:
 
-\[
-e_{2\_\text{ss}} =  - \frac{l_{r}}{R} + \frac{l_{f}}{c_{r}\left( l_{f} + l_{r}\right) }\frac{mV_{x}^{2}}{R}
-\]
+$$
+{e}_{2\_ {ss}} =  - \frac{{l}_{r}}{R} + \frac{{l}_{f}}{{c}_{r}\left( {{l}_{f} + {l}_{r}}\right) }\frac{m{V}_{x}^{2}}{R}
+$$
 
-\[
-=  - \frac{\widehat{l}_{r}}{R} + \alpha_{r}
-\]
+$$
+=  - \frac{{\widehat{l}}_{r}}{R} + {\alpha }_{r}
+$$
 
-yaw-angle error 的稳态不为 0 并不是一个问题。
+yaw-angle error的稳态不为0并不是一个问题。
 
-我们关心的是 heading angle \(\psi  + \beta  \rightarrow \psi_{\text{des}}\)
-
+我们关心的是heading angle $\psi  + \beta  -  -  > {\psi }_{des}$
 
 ### 2.3.2 反馈控制
 ### 2.3.2.1 Continuous LQR
