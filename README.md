@@ -577,49 +577,64 @@ $$
 \delta  =  - Kx =  - \underline{k_{1}e_{1}} - \underline{k_{2}e_{2}} - \underline{k_{3}e_{3}} - \underline{k_{4}e_{4}}
 $$
 
-$\dot{x} = \left( {A - {BK}}\right) x + C{\dot{\psi }}_{des}$
+$$
+\dot{x} = \left( {A - {BK}}\right) x + C{\dot{\psi }}_{des}
+$$
 
 由于 $C{\dot{\psi }}_{des}$ 的存在，即使 matrix（A - BK）是渐进稳定的，当车辆在弯道行驶时，tracking error不会趋于0
 
 **前馈控制器设计：**
 
-假设控制量为状态反馈 + 补偿道路曲率的前馈项
+假设控制量为状态反馈 + 补偿道路曲率的前馈项：
 
-$\delta  =  - {Kx} + \delta _{ff}$
+$$
+\delta  =  - Kx + \delta _{ff}
+$$
 
 那么闭环系统为：
 
-$\dot{x} = \left( {A - {BK}}\right) x + B{\delta }_{ff} + C{\dot{\psi }}_{des}$
+$$
+\dot{x} = \left( A - BK\right) x + B\delta _{ff} + C\dot{\psi }_{des}
+$$
 
-假设0初始条件，Laplace transforms:
+假设初始条件为0，拉普拉斯变换为：
 
-$X\left( s\right)  = {\left\lbrack  sI - \left( A - BK\right) \right\rbrack  }^{-1}\left\{  {{BL}\left( {\delta }_{ff}\right)  + {CL}\left( {\dot{\psi }}_{des}\right) }\right\}$
+$$
+X(s) = \left[ sI - \left( A - BK\right) \right]^{-1} \left\{  BL\left( \delta _{ff}\right)  + CL\left( \dot{\psi }_{des}\right) \right\}
+$$
 
-${X}_{ss} = \mathop{\lim }\limits_{{t \rightarrow  \infty }}x\left( t\right)  = \mathop{\lim }\limits_{{s \rightarrow  0}}{sX}\left( s\right)  =  - {\left( A - BK\right) }^{-1}\left\{  {B{\delta }_{ss} + C{\dot{\psi }}_{des}}\right\}$
+稳态值为：
+
+$$
+X_{ss} = \lim_{t \rightarrow  \infty} x(t)  = \lim_{s \rightarrow  0} \{sX(s)\} =  - \left( A - BK\right)^{-1}\left\{  B\delta _{ss} + C\dot{\psi }_{des}\right\}
+$$
 
 让横向位置误差的稳态为0，可得前馈前轮转角为：
 
-${\delta }_{ff} = L/R + {K}_{v}{a}_{y} + {k}_{3} * {e}_{2\_ {ss}},{a}_{y} = {V}_{x}^{2}/R$
+$$
+\delta _{ff} = \frac{L}{R} + K_{v}a_{y} + k_{3} \cdot e_{2\_ {ss}}, \quad a_{y} = \frac{V_{x}^{2}}{R}
+$$
 
 其中
 
-Understeer gradient:
-
-${K}_{v} = {m}_{f}/{c}_{f} - {m}_{r}/{c}_{r}$
-
-Steady-state yaw angle error:
+- 欠转梯度 (Understeer gradient):
 
 $$
-{e}_{2\_ {ss}} =  - \frac{{l}_{r}}{R} + \frac{{l}_{f}}{{c}_{r}\left( {{l}_{f} + {l}_{r}}\right) }\frac{m{V}_{x}^{2}}{R}
+K_{v} = \frac{m_{f}}{c_{f}} - \frac{m_{r}}{c_{r}}
+$$
+
+- 稳态横摆角误差 (Steady-state yaw angle error):
+
+$$
+e_{2\_ {ss}} =  - \frac{l_{r}}{R} + \frac{l_{f}}{c_{r}(l_{f} + l_{r})} \cdot \frac{mV_{x}^{2}}{R}
 $$
 
 $$
-=  - \frac{{\widehat{l}}_{r}}{R} + {\alpha }_{r}
+=  - \frac{\widehat{l}_{r}}{R} + \alpha_{r}
 $$
 
-yaw-angle error的稳态不为0并不是一个问题。
+yaw-angle 误差的稳态不为0并不是一个问题。我们关心的是航向角 (heading angle) $\psi + \beta \rightarrow \psi _{des}$。
 
-我们关心的是heading angle $\psi  + \beta  -  -  > {\psi }_{des}$
 
 ### 2.3.2 反馈控制
 ### 2.3.2.1 Continuous LQR
