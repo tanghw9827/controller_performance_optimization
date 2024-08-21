@@ -612,8 +612,9 @@ $$
 让横向位置误差的稳态为0，可得前馈前轮转角为：
 
 $$
-\delta _{ff} = \frac{L}{R} + K_{v}a_{y} + k_{3} \cdot e_{2\_ {ss}}, \quad a_{y} = \frac{V_{x}^{2}}{R}
+\delta _{ff} = \frac{L}{R} + K_{v}a_{y} + \underline{k_{3} \cdot e_{2\_ {ss}}}, \quad a_{y} = \frac{V_{x}^{2}}{R}
 $$
+
 
 其中
 
