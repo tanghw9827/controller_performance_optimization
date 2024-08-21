@@ -91,88 +91,89 @@ $$
 
 <img src="./images/resized_Dynamic_Bicycle_Model.png" alt="Fig 5 车辆二自由度动力学模型" style="width:60%;height:auto;">
 
+
 由于质心侧偏角远小于车辆航向角和横摆角，在实际应用中可以认为航向角与横摆角相等,受力分析可以得到：
 $$
-(F_{yf} \cos(\delta) - F_{xf} \sin(\delta)) + F_{yr} = m(\dot{v_y} + v_x \dot{\psi})
+(F_{yf} \cos(δ) - F_{xf} \sin(δ)) + F_{yr} = m(dv_y + v_x dψ)
 $$
 
 $$
-l_f (F_{yf} \cos(\delta) - F_{xf} \sin(\delta)) - l_r F_{yr} = I_z \ddot{\psi}
+l_f (F_{yf} \cos(δ) - F_{xf} \sin(δ)) - l_r F_{yr} = I_z d²ψ
 $$
-这里横向加速度带有$v_x$项，因为是矢量求导。
+这里横向加速度带有v_x项，因为是矢量求导。
 
 车辆的横向侧偏力可以写为
 
 $$
-F_{yf} = 2 * c_f (\delta - \theta_{f}) 
+F_{yf} = 2 * c_f (δ - θ_{f}) 
 $$
 
 $$
-F_{yr} = 2 * c_r (-\theta_{r})
+F_{yr} = 2 * c_r (-θ_{r})
 $$
 
-$c_f, c_r$ 定义为侧偏刚度, 2 表示有两个轮子。
+c_f, c_r 定义为侧偏刚度, 2 表示有两个轮子。
 
 使用小角度假设，
 $$
-\tan(\theta_{f}) = \frac{V_{yf} + l_{f}\dot{\psi}}{V_{x}}, \quad \tan(\theta_{r}) = \frac{V_{yr} - l_{r}\dot{\psi}}{V_{x}}
+\tan(θ_{f}) = \frac{V_{yf} + l_{f}dψ}{V_{x}}, \quad \tan(θ_{r}) = \frac{V_{yr} - l_{r}dψ}{V_{x}}
 $$
 
 $$
-\theta_{f} = \frac{V_{yf} + l_{f}\dot{\psi}}{V_{x}}, \quad \theta_{r} = \frac{V_{yr} - l_{r}\dot{\psi}}{V_{x}}
+θ_{f} = \frac{V_{yf} + l_{f}dψ}{V_{x}}, \quad θ_{r} = \frac{V_{yr} - l_{r}dψ}{V_{x}}
 $$
 
 $$
-\cos(\delta) \approx 1, \quad \sin(\delta) \approx 0
+\cos(δ) ≈ 1, \quad \sin(δ) ≈ 0
 $$
 
 可以得到，
 
 $$
 \begin{bmatrix}
-\dot{v}_y \\
-\ddot{\psi}
+dv_y \\
+d²ψ
 \end{bmatrix}
 =
 \begin{bmatrix}
 -\frac{2c_f + 2c_r}{mv_x} & \frac{2l_r c_r - 2l_f c_f}{mv_x} - v_x \\
-\frac{2l_r c_r - 2l_f c_f}{I_z v_x} & -\frac{2l_f^2 c_f + 2l_r^2 c_r}{I_z v_x}
+\frac{2l_r c_r - 2l_f c_f}{I_z v_x} & -\frac{2l_f² c_f + 2l_r² c_r}{I_z v_x}
 \end{bmatrix}
 \begin{bmatrix}
 v_y \\
-\dot{\psi}
+dψ
 \end{bmatrix}
 +
 \begin{bmatrix}
 \frac{2c_f}{m} \\
 \frac{2l_f c_f}{I_z}
 \end{bmatrix}
-\delta
+δ
 $$
 
 定义误差：
 
 $$
-\dot{\psi} = \frac{V_{x}}{R}
+dψ = \frac{V_{x}}{R}
 $$
 
 $$
-\ddot{e_{1}} = \ddot{y} + V_{x}\dot{\psi} - \frac{V_{x}^2}{R}
+d²e_{1} = d²y + V_{x}dψ - \frac{V_{x}²}{R}
 $$
 
 $$
-e_{2} = \psi - \psi_{des}
+e_{2} = ψ - ψ_{des}
 $$
 
 
-其中，$e_1$为横向位置误差，$e_2$为航向角误差。
+其中，e₁为横向位置误差，e₂为航向角误差。
 
 $$
-\dot{x} = Ax + Bu + C\psi_{des}
+dx = Ax + Bu + Cψ_{des}
 $$
 
 $$
-X = \begin{bmatrix} e_1 & e_2 & \dot{e}_1 & \dot{e}_2 \end{bmatrix}^T, \quad u = \delta
+X = \begin{bmatrix} e₁ & e₂ & d²e₁ & d²e₂ \end{bmatrix}^T, \quad u = δ
 $$
 
 
@@ -182,7 +183,7 @@ A = \begin{bmatrix}
 0 & 1 & 0 & 0 \\
 0 & -\frac{2c_f+2c_r}{mV_x} & \frac{2c_f+2c_r}{m} & -\frac{2c_f\ell_f - 2c_r\ell_r}{mV_x} \\
 0 & 0 & 0 & 1 \\
-0 & \frac{2c_f\ell_f - 2c_r\ell_r}{I_zV_x} & -\frac{2c_f\ell_f - 2c_r\ell_r}{I_z} & -\frac{2c_f\ell_f^2 + 2c_r\ell_r^2}{I_zV_x}
+0 & \frac{2c_f\ell_f - 2c_r\ell_r}{I_zV_x} & -\frac{2c_f\ell_f - 2c_r\ell_r}{I_z} & -\frac{2c_f\ell_f² + 2c_r\ell_r²}{I_zV_x}
 \end{bmatrix}
 $$
 
@@ -192,13 +193,13 @@ B = \begin{bmatrix}
 \frac{2c_f}{m} \\
 0 \\
 \frac{2c_f\ell_f}{I_z}
-\end{bmatrix} \delta
+\end{bmatrix} δ
 , \quad
 C = \begin{bmatrix}
 0 \\
 \frac{-2c_f\ell_f + 2c_r\ell_r - V_x}{mV_x} \\
 0 \\
--\frac{2c_f\ell_f^2 + 2c_r\ell_r^2}{I_zV_x}
+-\frac{2c_f\ell_f² + 2c_r\ell_r²}{I_zV_x}
 \end{bmatrix}
 $$
 
@@ -206,22 +207,22 @@ $$
 
 $$
 \frac{d}{dt} \begin{bmatrix}
-e_1 \\
-\dot{e}_1 \\
-e_2 \\
-\dot{e}_2
+e₁ \\
+d²e₁ \\
+e₂ \\
+d²e₂
 \end{bmatrix} = 
 \begin{bmatrix}
 0 & 1 & 0 & 0 \\
 0 & -\frac{2c_f+2c_r}{mV_x} & \frac{2c_f+2c_r}{m} & -\frac{2c_f\ell_f - 2c_r\ell_r}{mV_x} \\
 0 & 0 & 0 & 1 \\
-0 & \frac{2c_f\ell_f - 2c_r\ell_r}{I_zV_x} & -\frac{2c_f\ell_f - 2c_r\ell_r}{I_z} & -\frac{2c_f\ell_f^2 + 2c_r\ell_r^2}{I_zV_x}
+0 & \frac{2c_f\ell_f - 2c_r\ell_r}{I_zV_x} & -\frac{2c_f\ell_f - 2c_r\ell_r}{I_z} & -\frac{2c_f\ell_f² + 2c_r\ell_r²}{I_zV_x}
 \end{bmatrix}
 \begin{bmatrix}
-e_1 \\
-\dot{e}_1 \\
-e_2 \\
-\dot{e}_2
+e₁ \\
+d²e₁ \\
+e₂ \\
+d²e₂
 \end{bmatrix}
 +
 \begin{bmatrix}
@@ -229,14 +230,14 @@ e_2 \\
 \frac{2c_f}{m} \\
 0 \\
 \frac{2c_f\ell_f}{I_z}
-\end{bmatrix} \delta
+\end{bmatrix} δ
 +
 \begin{bmatrix}
 0 \\
 \frac{-2c_f\ell_f + 2c_r\ell_r - V_x}{mV_x} \\
 0 \\
--\frac{2c_f\ell_f^2 + 2c_r\ell_r^2}{I_zV_x}
-\end{bmatrix} \dot{\psi}_{des}
+-\frac{2c_f\ell_f² + 2c_r\ell_r²}{I_zV_x}
+\end{bmatrix} dψ_{des}
 $$
 
 ## 2.2 运动学和动力学参数标定
@@ -884,7 +885,7 @@ $$
 B_{d1} = t_s \cdot B
 $$
 
-$C_{d1} v_{\text{bias}}(k) $ 仅对横向有影响，通过前驱输入到最后的输入，构建MPC的时候不使用。
+$C_{d1} v_{\text{bias}}(k)$ 仅对横向有影响，通过前驱输入到最后的输入，构建MPC的时候不使用。
 
 to QP form :
 
