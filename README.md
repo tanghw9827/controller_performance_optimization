@@ -571,75 +571,90 @@ e. 图1 红色曲线为输入加速度，绿色曲线为底盘反馈加速度，
 ## 2.3 控制器设计
 ### 2.3.1 转向的前馈控制
 
+### 2.3.1 转向的前馈控制
+
 **为什么需要前馈：**
 
-$\delta  =  - {Kx} =  - {k}_{1}{e}_{1} - {k}_{2}{e}_{2} - {k}_{3}{e}_{3} - {k}_{4}{e}_{4}$
+$$
+\delta  =  - Kx =  - k_{1}e_{1} - k_{2}e_{2} - k_{3}e_{3} - k_{4}e_{4}
+$$
 
-$\dot{x} = \left( {A - {BK}}\right) x + C{\dot{\psi }}_{des}$
+$$
+\dot{x} = \left( A - BK\right) x + C\dot{\psi}_{\text{des}}
+$$
 
-由于 $C{\dot{\psi }}_{des}$ 的存在，即使 matrix（A - BK）是渐进稳定的，当车辆在弯道行驶时，tracking error不会趋于0。
+由于 $C\dot{\psi}_{\text{des}}$ 的存在，即使 matrix $A - BK$ 是渐进稳定的，当车辆在弯道行驶时，tracking error 不会趋于 0。
 
 **前馈控制器设计：**
 
 假设控制量为状态反馈 + 补偿道路曲率的前馈项
 
-$\delta  =  - {Kx} + \delta _{ff}$
+$$
+\delta  =  - Kx + \delta_{\text{ff}}
+$$
 
 那么闭环系统为：
 
-$\dot{x} = \left( {A - {BK}}\right) x + B{\delta }_{ff} + C{\dot{\psi }}_{des}$
+$$
+\dot{x} = \left( A - BK\right) x + B\delta_{\text{ff}} + C\dot{\psi}_{\text{des}}
+$$
 
-假设初始条件为零，使用拉普拉斯变换：
+假设 0 初始条件，Laplace 变换:
 
-$X\left( s\right)  = {\left\lbrack  sI - \left( A - BK\right) \right\rbrack  }^{-1}\left\{  {{BL}\left( {\delta }_{ff}\right)  + {CL}\left( {\dot{\psi }}_{des}\right) }\right\}$
+$$
+X\left( s\right)  = \left[ sI - \left( A - BK\right) \right]^{-1}\left\{  BL\left( \delta_{\text{ff}}\right)  + CL\left( \dot{\psi}_{\text{des}}\right) \right\}
+$$
 
-稳态时：
+$$
+X_{\text{ss}} = \lim_{t \rightarrow \infty}x(t)  = \lim_{s \rightarrow  0} sX(s)  =  - \left( A - BK\right)^{-1}\left\{  B\delta_{\text{ss}} + C\dot{\psi}_{\text{des}}\right\}
+$$
 
-${X}_{ss} = \mathop{\lim }\limits_{{t \rightarrow  \infty }}x\left( t\right)  = \mathop{\lim }\limits_{{s \rightarrow  0}}{sX}\left( s\right)  =  - {\left( A - BK\right) }^{-1}\left\{  {B{\delta }_{ss} + C{\dot{\psi }}_{des}}\right\}$
+让横向位置误差的稳态为 0，可得前馈前轮转角为：
 
-让横向位置误差的稳态为零，可以得出前馈前轮转角为：
-
-${\delta }_{ff} = \frac{L}{R} + {K}_{v}{a}_{y} + {k}_{3} \cdot {e}_{2\_ {ss}} \quad \text{其中} \quad {a}_{y} = \frac{V_{x}^{2}}{R}$
+$$
+\delta_{\text{ff}} = \frac{L}{R} + K_{v}a_{y} + k_{3} \cdot e_{2\_\text{ss}}, \quad a_{y} = \frac{V_{x}^{2}}{R}
+$$
 
 其中
 
-欠转向梯度：
-
-${K}_{v} = \frac{m_{f}}{c_{f}} - \frac{m_{r}}{c_{r}}$
-
-稳态横摆角误差：
+Understeer gradient:
 
 $$
-{e}_{2\_ {ss}} =  - \frac{l_{r}}{R} + \frac{l_{f}}{{c}_{r}\left( {l_{f} + l_{r}}\right) }\frac{mV_{x}^{2}}{R}
+K_{v} = \frac{m_{f}}{c_{f}} - \frac{m_{r}}{c_{r}}
+$$
+
+Steady-state yaw angle error:
+
+$$
+e_{2\_\text{ss}} =  - \frac{l_{r}}{R} + \frac{l_{f}}{c_{r}\left( l_{f} + l_{r}\right) }\frac{mV_{x}^{2}}{R}
 $$
 
 $$
-=  - \frac{\widehat{l}_{r}}{R} + \alpha _{r}
+=  - \frac{\widehat{l}_{r}}{R} + \alpha_{r}
 $$
 
-yaw角误差的稳态不为零并不是问题。我们关心的是航向角 $\psi + \beta \rightarrow \psi_{des}$。
+yaw-angle error 的稳态不为 0 并不是一个问题。
+
+我们关心的是 heading angle $\psi  + \beta  \rightarrow \psi_{\text{des}}$
 
 ### 2.3.2 反馈控制
+### 2.3.2.1 Continuous LQR
 
-#### 2.3.2.1 Continuous LQR
-
-求解控制输入 $u$，满足：
-
-$$
-\min J = \frac{1}{2} \int_{0}^{T} \left( x^{T} Q x + u^{T} R u \right) dt + \frac{1}{2} x^{T}(T) P_{1} x(T)
-$$
-
-约束条件：
+求解控制输入u，满足：
 
 $$
-s.t.  \dot{x} = Ax + Bu
+\min J = \frac{1}{2}{\int }_{0}^{T}\left( {{x}^{T}{Qx} + {u}^{T}{Ru}}\right) {dt} + \frac{1}{2}{x}^{T}\left( T\right) {P}_{1}x\left( T\right)
 $$
 
 $$
-P_{1} = P_{1}^{T} \geq 0, Q = Q^{T} \geq 0, R = R^{T} > 0
+s.t.  \dot{x} = {Ax} + {Bu}
 $$
 
-系统可以用线性微分方程表示，目标函数为二次泛函，LQR (Linear Quadratic Regulator) 。
+$$
+{P}_{1} = {P}_{1}^{T} \geq  0,Q = {Q}^{T} \geq  0,R = {R}^{T} > 0
+$$
+
+系统可以用线性微分方程表示，目标函数为二次泛函，LQR(Linear Quadratic Regulator) 
 
 通过最大值原则求解
 
@@ -673,29 +688,29 @@ $$
 
 这个ODE被称为Riccati ODE。
 
-#### 2.3.2.2 Dynamic Programming and Discrete LQR
+### 2.3.2.2 Dynamic Programming and Discrete LQR
 
-**最优性原则：** 假设一个问题的最优解通过某个中间点 $(x_1, t_1)$，那么从 $(x_1, t_1)$ 开始的同一问题的最优解必须是同一路径的延续。
+**最优性原则：** 假设一个问题的最优解通过某个中间点 \((x_1, t_1)\)，那么从 \((x_1, t_1)\) 开始的同一问题的最优解必须是同一路径的延续。
 
-![图示](https://cdn.noedgeai.com/019173d5-4191-79d8-b8d9-9505ea41576b_3.jpg?x=523&y=548&w=346&h=231)
+<img src="https://cdn.noedgeai.com/019173d5-4191-79d8-b8d9-9505ea41576b_3.jpg?x=523&y=548&w=346&h=231"/>
 
-**离散LQR可以解析求解：**
+**Discrete LQR can be solved analytically**
 
-**目标:** 选择控制输入最小化
+💡 **Goal:** Select control inputs to minimize
 
 $$
 J = \frac{1}{2}x_N^T H x_N + \frac{1}{2} \sum_{k=0}^{N-1} \left( x_k^T Q_k x_k + u_k^T R_k u_k \right)
 $$
 
-满足动态约束
+subject to dynamics
 
 $x_{k+1} = A_k x_k + B_k u_k$
 
-假设 $H = H^T \geq 0$，$Q = Q^T \geq 0$，$R = R^T > 0$。
+Assume that $H = H^T \geq 0$, $Q = Q^T \geq 0$, $R = R^T > 0$.
 
-令 $g_k(z_k, u_k) = \frac{1}{2}(z_k^T Q_k z_k + u_k^T R_k u_k)$。
+Let $g_k(z_k, u_k) = \frac{1}{2}(z_k^T Q_k z_k + u_k^T R_k u_k)$.
 
-**"cost-to-go"** $J_{N-1}[X_N] = \frac{1}{2}x_N^T H x_N$ — 找到 $J_{N-1}[X_{N-1}]$
+**"cost-to-go"** $J_{N-1}[X_N] = \frac{1}{2}x_N^T H x_N$ — find $J_{N-1}[X_{N-1}]$
 
 $$
 J_{N-1}[X_{N-1}] = \min_{u_{N-1}} \left[ g_{N-1}(z_{N-1}, u_{N-1}) + J_N[X_N] \right]
@@ -741,7 +756,7 @@ $$
 J_{N-1}[X_{N-1}] = \frac{1}{2} x_{N-1}^T \left\{Q_{N-1} + F_{N-1}^T R_{N-1} F_{N-1} + \left(A_{N-1} - B_{N-1} F_{N-1}\right)^T H \left(A_{N-1} - B_{N-1} F_{N-1}\right)\right\} x_{N-1}
 $$
 
-Note that $P_N = H$。
+Note that $P_N = H$.
 
 ......
 
@@ -769,15 +784,15 @@ cycle through from $N-1 \rightarrow 0$
 
 **Steady state**
 
-LTI system, $A$, $B$, $Q$, $R$ are constant。
+LTI system, $A$, $B$, $Q$, $R$ are constant.
 
-For any $H$，then as $N \rightarrow \infty$，the recursion for $P$ tends to a constant solution。
+For any $H$, then as $N \rightarrow \infty$, the recursion for $P$ tends to a constant solution.
 
 $$
 P = A^T P A - A^T P B \left[R + B^T P B\right]^{-1} B^T P A + Q
 $$
 
-**离散形式的代数Riccati方程：**
+**Discrete form of Algebraic Riccati Equation**
 
 ```cpp
 Matrix P = Q;
