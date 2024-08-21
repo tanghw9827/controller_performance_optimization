@@ -507,7 +507,7 @@ $$
 因此侧偏刚度为（单轮胎）
 
 $$
-{C}_{f} = {C}_{r} = B \times  C \times  D = {0.1235} \times  {2.217} \times  {6783} = {1857.18201N}/{}^{0} = {106408.6928N}/{rad}
+C_f = C_r = B \times C \times D = 0.1235 \times 2.217 \times 6783 = 1857.18201\, \text{N/}^\circ = 106408.6928\, \text{N/rad}
 $$
 
 <img src="https://cdn.noedgeai.com/01917399-ede1-7137-b395-32a45b12c0ee_9.jpg?x=130&y=1416&w=1201&h=498"/>
