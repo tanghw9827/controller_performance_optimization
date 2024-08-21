@@ -577,7 +577,7 @@ $\delta  =  - {Kx} =  - {k}_{1}{e}_{1} - {k}_{2}{e}_{2} - {k}_{3}{e}_{3} - {k}_{
 
 $\dot{x} = \left( {A - {BK}}\right) x + C{\dot{\psi }}_{des}$
 
-由于 $C{\dot{\psi }}_{des}$ 的存在，即使 matrix（A - BK）是渐进稳定的，当车辆在弯道行驶时，tracking error不会趋于0
+由于 $C{\dot{\psi }}_{des}$ 的存在，即使 matrix（A - BK）是渐进稳定的，当车辆在弯道行驶时，tracking error不会趋于0。
 
 **前馈控制器设计：**
 
@@ -589,54 +589,57 @@ $\delta  =  - {Kx} + \delta _{ff}$
 
 $\dot{x} = \left( {A - {BK}}\right) x + B{\delta }_{ff} + C{\dot{\psi }}_{des}$
 
-假设0初始条件，Laplace transforms:
+假设初始条件为零，使用拉普拉斯变换：
 
 $X\left( s\right)  = {\left\lbrack  sI - \left( A - BK\right) \right\rbrack  }^{-1}\left\{  {{BL}\left( {\delta }_{ff}\right)  + {CL}\left( {\dot{\psi }}_{des}\right) }\right\}$
 
+稳态时：
+
 ${X}_{ss} = \mathop{\lim }\limits_{{t \rightarrow  \infty }}x\left( t\right)  = \mathop{\lim }\limits_{{s \rightarrow  0}}{sX}\left( s\right)  =  - {\left( A - BK\right) }^{-1}\left\{  {B{\delta }_{ss} + C{\dot{\psi }}_{des}}\right\}$
 
-让横向位置误差的稳态为0，可得前馈前轮转角为：
+让横向位置误差的稳态为零，可以得出前馈前轮转角为：
 
-${\delta }_{ff} = L/R + {K}_{v}{a}_{y} + {k}_{3} * {e}_{2\_ {ss}},{a}_{y} = {V}_{x}^{2}/R$
+${\delta }_{ff} = \frac{L}{R} + {K}_{v}{a}_{y} + {k}_{3} \cdot {e}_{2\_ {ss}} \quad \text{其中} \quad {a}_{y} = \frac{V_{x}^{2}}{R}$
 
 其中
 
-Understeer gradient:
+欠转向梯度：
 
-${K}_{v} = {m}_{f}/{c}_{f} - {m}_{r}/{c}_{r}$
+${K}_{v} = \frac{m_{f}}{c_{f}} - \frac{m_{r}}{c_{r}}$
 
-Steady-state yaw angle error:
-
-$$
-{e}_{2\_ {ss}} =  - \frac{{l}_{r}}{R} + \frac{{l}_{f}}{{c}_{r}\left( {{l}_{f} + {l}_{r}}\right) }\frac{m{V}_{x}^{2}}{R}
-$$
+稳态横摆角误差：
 
 $$
-=  - \frac{{\widehat{l}}_{r}}{R} + {\alpha }_{r}
+{e}_{2\_ {ss}} =  - \frac{l_{r}}{R} + \frac{l_{f}}{{c}_{r}\left( {l_{f} + l_{r}}\right) }\frac{mV_{x}^{2}}{R}
 $$
 
-yaw-angle error的稳态不为0并不是一个问题。
+$$
+=  - \frac{\widehat{l}_{r}}{R} + \alpha _{r}
+$$
 
-我们关心的是heading angle $\psi  + \beta  -  -  > {\psi }_{des}$
+yaw角误差的稳态不为零并不是问题。我们关心的是航向角 $\psi + \beta \rightarrow \psi_{des}$。
 
 ### 2.3.2 反馈控制
-### 2.3.2.1 Continuous LQR
 
-求解控制输入u，满足：
+#### 2.3.2.1 Continuous LQR
 
-$$
-\min J = \frac{1}{2}{\int }_{0}^{T}\left( {{x}^{T}{Qx} + {u}^{T}{Ru}}\right) {dt} + \frac{1}{2}{x}^{T}\left( T\right) {P}_{1}x\left( T\right)
-$$
+求解控制输入 $u$，满足：
 
 $$
-s.t.  \dot{x} = {Ax} + {Bu}
+\min J = \frac{1}{2}{\int }_{0}^{T}\left( x^{T}Qx + u^{T}Ru\right) dt + \frac{1}{2}x^{T}\left( T\right) P_{1}x\left( T\right)
+$$
+
+约束条件：
+
+$$
+s.t.  \dot{x} = Ax + Bu
 $$
 
 $$
-{P}_{1} = {P}_{1}^{T} \geq  0,Q = {Q}^{T} \geq  0,R = {R}^{T} > 0
+P_{1} = P_{1}^{T} \geq 0, Q = Q^{T} \geq 0, R = R^{T} > 0
 $$
 
-系统可以用线性微分方程表示，目标函数为二次泛函，LQR(Linear Quadratic Regulator) 
+系统可以用线性微分方程表示，目标函数为二次泛函，LQR (Linear Quadratic Regulator) 。
 
 通过最大值原则求解
 
@@ -670,29 +673,29 @@ $$
 
 这个ODE被称为Riccati ODE。
 
-### 2.3.2.2 Dynamic Programming and Discrete LQR
+#### 2.3.2.2 Dynamic Programming and Discrete LQR
 
-**最优性原则：** 假设一个问题的最优解通过某个中间点 \((x_1, t_1)\)，那么从 \((x_1, t_1)\) 开始的同一问题的最优解必须是同一路径的延续。
+**最优性原则：** 假设一个问题的最优解通过某个中间点 $(x_1, t_1)$，那么从 $(x_1, t_1)$ 开始的同一问题的最优解必须是同一路径的延续。
 
-<img src="https://cdn.noedgeai.com/019173d5-4191-79d8-b8d9-9505ea41576b_3.jpg?x=523&y=548&w=346&h=231"/>
+![图示](https://cdn.noedgeai.com/019173d5-4191-79d8-b8d9-9505ea41576b_3.jpg?x=523&y=548&w=346&h=231)
 
-**Discrete LQR can be solved analytically**
+**离散LQR可以解析求解：**
 
-💡 **Goal:** Select control inputs to minimize
+**目标:** 选择控制输入最小化
 
 $$
 J = \frac{1}{2}x_N^T H x_N + \frac{1}{2} \sum_{k=0}^{N-1} \left( x_k^T Q_k x_k + u_k^T R_k u_k \right)
 $$
 
-subject to dynamics
+满足动态约束
 
 $x_{k+1} = A_k x_k + B_k u_k$
 
-Assume that $H = H^T \geq 0$, $Q = Q^T \geq 0$, $R = R^T > 0$.
+假设 $H = H^T \geq 0$，$Q = Q^T \geq 0$，$R = R^T > 0$。
 
-Let $g_k(z_k, u_k) = \frac{1}{2}(z_k^T Q_k z_k + u_k^T R_k u_k)$.
+令 $g_k(z_k, u_k) = \frac{1}{2}(z_k^T Q_k z_k + u_k^T R_k u_k)$。
 
-**"cost-to-go"** $J_{N-1}[X_N] = \frac{1}{2}x_N^T H x_N$ — find $J_{N-1}[X_{N-1}]$
+**"cost-to-go"** $J_{N-1}[X_N] = \frac{1}{2}x_N^T H x_N$ — 找到 $J_{N-1}[X_{N-1}]$
 
 $$
 J_{N-1}[X_{N-1}] = \min_{u_{N-1}} \left[ g_{N-1}(z_{N-1}, u_{N-1}) + J_N[X_N] \right]
@@ -738,7 +741,7 @@ $$
 J_{N-1}[X_{N-1}] = \frac{1}{2} x_{N-1}^T \left\{Q_{N-1} + F_{N-1}^T R_{N-1} F_{N-1} + \left(A_{N-1} - B_{N-1} F_{N-1}\right)^T H \left(A_{N-1} - B_{N-1} F_{N-1}\right)\right\} x_{N-1}
 $$
 
-Note that $P_N = H$.
+Note that $P_N = H$。
 
 ......
 
@@ -766,15 +769,15 @@ cycle through from $N-1 \rightarrow 0$
 
 **Steady state**
 
-LTI system, $A$, $B$, $Q$, $R$ are constant.
+LTI system, $A$, $B$, $Q$, $R$ are constant。
 
-For any $H$, then as $N \rightarrow \infty$, the recursion for $P$ tends to a constant solution.
+For any $H$，then as $N \rightarrow \infty$，the recursion for $P$ tends to a constant solution。
 
 $$
 P = A^T P A - A^T P B \left[R + B^T P B\right]^{-1} B^T P A + Q
 $$
 
-**Discrete form of Algebraic Riccati Equation**
+**离散形式的代数Riccati方程：**
 
 ```cpp
 Matrix P = Q;
