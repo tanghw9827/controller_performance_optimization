@@ -909,6 +909,7 @@ n = \text{stateDim} \times (\text{horizon} + 1) + \text{controlDim} \times \text
 $$
 
 A(row, cols)，row 为：
+
 $$
 \text{row} = \text{stateDim} \times (\text{horizon} + 1) + \text{stateDim} \times (\text{horizon} + 1) + \text{controlDim} \times \text{horizon}
 $$
