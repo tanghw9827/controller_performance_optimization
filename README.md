@@ -617,13 +617,13 @@ $$
 
 其中
 
-- 欠转梯度 (Understeer gradient):
+- **欠转梯度 (Understeer gradient)**：
 
 $$
 K_{v} = \frac{m_{f}}{c_{f}} - \frac{m_{r}}{c_{r}}
 $$
 
-- 稳态横摆角误差 (Steady-state yaw angle error):
+- **稳态横摆角误差 (Steady-state yaw angle error)**：
 
 $$
 e_{2\_ {ss}} =  - \frac{l_{r}}{R} + \frac{l_{f}}{c_{r}(l_{f} + l_{r})} \cdot \frac{mV_{x}^{2}}{R}
@@ -634,6 +634,7 @@ $$
 $$
 
 yaw-angle 误差的稳态不为0并不是一个问题。我们关心的是航向角 (heading angle) $\psi + \beta \rightarrow \psi _{des}$。
+
 
 
 ### 2.3.2 反馈控制
