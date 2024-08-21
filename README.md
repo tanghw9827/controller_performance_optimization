@@ -234,6 +234,7 @@ $$
 <img src="https://cdn.noedgeai.com/01917399-ede1-7137-b395-32a45b12c0ee_1.jpg?x=162&y=526&w=1021&h=605"/>
 
 上图有如下几何关系：
+
 $$
 \tan \left( \delta \right)  = \frac{L}{R}
 $$
