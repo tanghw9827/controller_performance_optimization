@@ -591,7 +591,6 @@ $$
 \delta  =  - Kx + \delta _{ff}
 $$
 
-
 ![Fig 1](./images/2024-08-21_20-07.png)
 
 ### 2.3.2 反馈控制
@@ -599,17 +598,7 @@ $$
 
 求解控制输入u，满足：
 
-$$
-\min J = \frac{1}{2}{\int }_{0}^{T}\left( {{x}^{T}{Qx} + {u}^{T}{Ru}}\right) {dt} + \frac{1}{2}{x}^{T}\left( T\right) {P}_{1}x\left( T\right)
-$$
-
-$$
-s.t.  \dot{x} = {Ax} + {Bu}
-$$
-
-$$
-{P}_{1} = {P}_{1}^{T} \geq  0,Q = {Q}^{T} \geq  0,R = {R}^{T} > 0
-$$
+![Fig 1](./images/2024-08-21_20-11.png)
 
 系统可以用线性微分方程表示，目标函数为二次泛函，LQR(Linear Quadratic Regulator) 
 
