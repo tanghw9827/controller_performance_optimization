@@ -884,7 +884,7 @@ $$
 B_{d1} = t_s \cdot B
 $$
 
-$C_{d1} v_{\text{bias}}(k)$ 仅对横向有影响，通过前驱输入到最后的输入，构建MPC的时候不使用。
+$C_{d1} v_{\text{bias}}(k) $ 仅对横向有影响，通过前驱输入到最后的输入，构建MPC的时候不使用。
 
 to QP form :
 
@@ -902,16 +902,18 @@ $$
 P(n, n), q(n, 1)
 $$
 
+其中n:
+
 $$
 n = \text{state\_dim\_} \times (\text{horizon\_} + 1) + \text{control\_dim\_} \times \text{horizon\_}
 $$
 
-A(row, cols) :
-
+A(row, cols)，row为：
 $$
 \text{row} = \text{state\_dim\_} \times (\text{horizon\_} + 1) + \text{state\_dim\_} \times (\text{horizon\_} + 1) + \text{control\_dim\_} \times \text{horizon\_}
 $$
 
+cols为：
 $$
 \text{cols} = \text{state\_dim\_} \times (\text{horizon\_} + 1) + \text{control\_dim\_} \times \text{horizon\_}
 $$
