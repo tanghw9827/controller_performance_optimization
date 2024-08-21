@@ -92,6 +92,7 @@ $$
 <img src="./images/resized_Dynamic_Bicycle_Model.png" alt="Fig 5 车辆二自由度动力学模型" style="width:60%;height:auto;">
 
 由于质心侧偏角远小于车辆航向角和横摆角，在实际应用中可以认为航向角与横摆角相等,受力分析可以得到：
+
 $$
 (F_{yf} \cos(δ) - F_{xf} \sin(δ)) + F_{yr} = m(dv_y + v_x dψ)
 $$
@@ -99,6 +100,7 @@ $$
 $$
 l_f (F_{yf} \cos(δ) - F_{xf} \sin(δ)) - l_r F_{yr} = I_z d²ψ
 $$
+
 这里横向加速度带有v_x项，因为是矢量求导。
 
 车辆的横向侧偏力可以写为
@@ -114,6 +116,7 @@ $$
 c_f, c_r 定义为侧偏刚度, 2 表示有两个轮子。
 
 使用小角度假设，
+
 $$
 \tan(θ_{f}) = \frac{V_{yf} + l_{f}dψ}{V_{x}}, \quad \tan(θ_{r}) = \frac{V_{yr} - l_{r}dψ}{V_{x}}
 $$
