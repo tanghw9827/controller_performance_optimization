@@ -299,8 +299,10 @@ $$
 
 - 后轴旋转半径 
 
+- 后轴旋转半径 
+
 $$
-\mathrm{R}\_ \mathrm{b} = \operatorname{sqrt}\left( {\mathrm{b} \land  2 - {\mathrm{k}}^{ \land  }2}\right)  + \mathrm{B}/2
+R_b = \sqrt{b^2 - k^2} + \frac{B}{2}
 $$
 
 - 前轮旋转角 $\alpha  = \arctan \left( {\mathrm{L}/R_b}\right)$ 、
