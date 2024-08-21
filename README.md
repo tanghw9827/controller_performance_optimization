@@ -131,27 +131,8 @@ $$
 
 可以得到，
 
-$$
-\begin{bmatrix}
-dv_y \\
-d²ψ
-\end{bmatrix}
-=
-\begin{bmatrix}
--\frac{2c_f + 2c_r}{mv_x} & \frac{2l_r c_r - 2l_f c_f}{mv_x} - v_x \\
-\frac{2l_r c_r - 2l_f c_f}{I_z v_x} & -\frac{2l_f² c_f + 2l_r² c_r}{I_z v_x}
-\end{bmatrix}
-\begin{bmatrix}
-v_y \\
-dψ
-\end{bmatrix}
-+
-\begin{bmatrix}
-\frac{2c_f}{m} \\
-\frac{2l_f c_f}{I_z}
-\end{bmatrix}
-δ
-$$
+
+![Fig 1](./images/2024-08-21_19-29.png)
 
 定义误差：
 
