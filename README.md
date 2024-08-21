@@ -573,7 +573,9 @@ e. 图1 红色曲线为输入加速度，绿色曲线为底盘反馈加速度，
 
 **为什么需要前馈：**
 
-$\delta  =  - {Kx} =  - <u>{k}_{1}{e}_{1}</u> - <u>{k}_{2}{e}_{2}</u> - <u>{k}_{3}{e}_{3}</u> - <u>{k}_{4}{e}_{4}</u>$
+$$
+\delta  =  - Kx =  - \underline{k_{1}e_{1}} - \underline{k_{2}e_{2}} - \underline{k_{3}e_{3}} - \underline{k_{4}e_{4}}
+$$
 
 $\dot{x} = \left( {A - {BK}}\right) x + C{\dot{\psi }}_{des}$
 
