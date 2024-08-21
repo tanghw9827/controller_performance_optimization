@@ -297,9 +297,14 @@ $$
 
 - RTK旋转半径b=speed_RTK/omega_z（固定方向盘转角时，多组数据可以使用最小二乘法拟合出旋转半径)
 
-- 后轴旋转半径 $\mathrm{R}\_ \mathrm{b} = \operatorname{sqrt}\left( {\mathrm{b} \land  2 - {\mathrm{k}}^{ \land  }2}\right)  + \mathrm{B}/2$
+- 后轴旋转半径 
 
-- 前轮旋转角 $\alpha  = \arctan \left( {\mathrm{L}/R_b}\right)$ 、${β=arctan(L/(R_b-B))}$
+$$
+\mathrm{R}\_ \mathrm{b} = \operatorname{sqrt}\left( {\mathrm{b} \land  2 - {\mathrm{k}}^{ \land  }2}\right)  + \mathrm{B}/2
+$$
+
+- 前轮旋转角 $\alpha  = \arctan \left( {\mathrm{L}/R_b}\right)$ 、
+${β=arctan(L/(R_b-B))}$
 
 ###### 理想one标定结果
 
