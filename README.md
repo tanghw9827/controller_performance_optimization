@@ -1096,7 +1096,7 @@ matrix_r[0]: min_gain = 1, max_gain = 10, step = 1
 
 图二 参考速度插值后的纵向跟踪效果（直线加减速轨迹，加延时）
 
-## 2.Lateral Error
+#### 2.3.2.6.2.Lateral Error
 
 对应函数：void MPCController::ComputeLateralErrors ()
 
