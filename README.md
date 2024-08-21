@@ -896,30 +896,28 @@ $$
 \text{s.t. } Ax \leq u
 $$
 
-矩阵大小：
+矩阵大小:
 
 $$
 P(n, n), q(n, 1)
 $$
 
-其中 n 为：
+其中 n:
 
 $$
-n = \text{state\`_dim\_} \times (\text{horizon\`_} + 1) + \text{control\`_dim\_} \times \text{horizon\`_}
+n = \text{stateDim} \times (\text{horizon} + 1) + \text{controlDim} \times \text{horizon}
 $$
 
 A(row, cols)，row 为：
-
 $$
-\text{row} = \text{state\`_dim\_} \times (\text{horizon\`_} + 1) + \text{state\`_dim\_} \times (\text{horizon\`_} + 1) + \text{control\`_dim\_} \times \text{horizon\`_}
+\text{row} = \text{stateDim} \times (\text{horizon} + 1) + \text{stateDim} \times (\text{horizon} + 1) + \text{controlDim} \times \text{horizon}
 $$
 
 cols 为：
 
 $$
-\text{cols} = \text{state\`_dim\_} \times (\text{horizon\`_} + 1) + \text{control\`_dim\_} \times \text{horizon\`_}
+\text{cols} = \text{stateDim} \times (\text{horizon} + 1) + \text{controlDim} \times \text{horizon}
 $$
-
 
 
 注意事项
