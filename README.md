@@ -884,10 +884,9 @@ $$
 B_{d1} = t_s \cdot B
 $$
 
-$$
-C_{d1} v_{\text{bias}}(k) $$ 仅对横向有影响，通过前驱输入到最后的输入，构建MPC的时候不使用。
+$C_{d1} v_{\text{bias}}(k)$ 仅对横向有影响，通过前驱输入到最后的输入，构建MPC的时候不使用。
 
-to QP form
+to QP form :
 
 $$
 \min \left(\frac{1}{2}x^T P x + q^T x\right)
@@ -897,7 +896,7 @@ $$
 \text{s.t. } Ax \leq u
 $$
 
-矩阵size
+矩阵size :
 
 $$
 P(n, n), q(n, 1)
@@ -907,7 +906,7 @@ $$
 n = \text{state\_dim\_} \times (\text{horizon\_} + 1) + \text{control\_dim\_} \times \text{horizon\_}
 $$
 
-A(row, cols)
+A(row, cols) :
 
 $$
 \text{row} = \text{state\_dim\_} \times (\text{horizon\_} + 1) + \text{state\_dim\_} \times (\text{horizon\_} + 1) + \text{control\_dim\_} \times \text{horizon\_}
@@ -1014,20 +1013,15 @@ LQR更复杂的约束如何处理？计算使用的模型和实际模型存在�
 
 通过虚拟闭环仿真计算最优权重, 车辆实际状态通过状态方程估计, 通过控制输出直接更新。对每个速度，遍历gain，一条参考轨迹需要运行
 
-$$
-{\left( \frac{{g}_{\max } - {g}_{\min }}{step}\right) }^{n}\text{次}
-$$
+![Fig 1](./images/2024-08-21_18-59.png)
 
 轨迹跟踪性能评价KPI，误差项:
 
-$$
-{e}_{1} = {lat}\_ {err},{e}_{2} = {heading}\_ {err},{e}_{3} = {steer}\_ {rate},{e}_{4} = {longitudinal}\_ {error},{e}_{5} = {acc}\_ {rate}
-$$
+![Fig 1](./images/2024-08-21_18-58.png)
 
 统一形式，P为权重,
-$$
-{KPI} = \frac{1}{\mathop{\sum }\limits_{{i = 1}}^{5}\left( {\operatorname{mean}\left( {{abs}\left( {e}_{i}\right) }\right) }\right) } + \frac{P}{\mathop{\sum }\limits_{{i = 1}}^{5}\left( {\max \left( {{abs}\left( {e}_{i}\right) }\right) }\right) }
-$$  
+
+![Fig 1](./images/2024-08-21_18-56.png)
 
 ```cpp
 for (int i = 0; i < num_speed; ++i) {
@@ -1098,7 +1092,7 @@ matrix_r[0]: min_gain = 1, max_gain = 10, step = 1
 
 图二 参考速度插值后的纵向跟踪效果（直线加减速轨迹，加延时）
 
-#### 2.3.2.6.2.Lateral Error
+## 2.Lateral Error
 
 对应函数：void MPCController::ComputeLateralErrors ()
 
