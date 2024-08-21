@@ -591,52 +591,8 @@ $$
 \delta  =  - Kx + \delta _{ff}
 $$
 
-那么闭环系统为：
 
-$$
-\dot{x} = \left( A - BK\right) x + B\delta _{ff} + C\dot{\psi }_{des}
-$$
-
-假设初始条件为0，拉普拉斯变换为：
-
-$$
-X(s) = \left[ sI - \left( A - BK\right) \right]^{-1} \left\{  BL\left( \delta _{ff}\right)  + CL\left( \dot{\psi }_{des}\right) \right\}
-$$
-
-稳态值为：
-
-$$
-X_{ss} = \lim_{t \rightarrow  \infty} x(t)  = \lim_{s \rightarrow  0} \{sX(s)\} =  - \left( A - BK\right)^{-1}\left\{  B\delta _{ss} + C\dot{\psi }_{des}\right\}
-$$
-
-让横向位置误差的稳态为0，可得前馈前轮转角为：
-
-$$
-\delta _{ff} = \frac{L}{R} + K_{v}a_{y} + \underline{k_{3} \cdot e_{2\_ {ss}}}, \quad a_{y} = \frac{V_{x}^{2}}{R}
-$$
-
-
-其中
-
-- **欠转梯度 (Understeer gradient)**：
-
-$$
-K_{v} = \frac{m_{f}}{c_{f}} - \frac{m_{r}}{c_{r}}
-$$
-
-- **稳态横摆角误差 (Steady-state yaw angle error)**：
-
-$$
-e_{2\_ {ss}} =  - \frac{l_{r}}{R} + \frac{l_{f}}{c_{r}(l_{f} + l_{r})} \cdot \frac{mV_{x}^{2}}{R}
-$$
-
-$$
-=  - \frac{\widehat{l}_{r}}{R} + \alpha_{r}
-$$
-
-yaw-angle 误差的稳态不为0并不是一个问题。我们关心的是航向角 (heading angle) $\psi + \beta \rightarrow \psi _{des}$。
-
-
+![Fig 1](./images/2024-08-21_20-07.png)
 
 ### 2.3.2 反馈控制
 ### 2.3.2.1 Continuous LQR
